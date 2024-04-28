@@ -15,7 +15,7 @@
 		<ApplicationTitle>TradeTracker</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.tradetracker</ApplicationId>
+		<ApplicationId>com.bimmosherwood.tradetracker</ApplicationId>
 		<ApplicationIdGuid>7d7e042d-6e5d-4585-8367-753a5b4fcf33</ApplicationIdGuid>
 
 		<!-- Versions -->

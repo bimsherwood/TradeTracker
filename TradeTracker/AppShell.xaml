@@ -4,11 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TradeTracker"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+        Title="Trade Editor"
+        ContentTemplate="{DataTemplate local:TradeEditor}"
+        Route="TradeEditor" />
+    <ShellContent
+        Title="Balance Sheet"
+        ContentTemplate="{DataTemplate local:BalanceSheet}"
+        Route="BalanceSheet" />
+    <ShellContent
+        Title="Trade History"
+        ContentTemplate="{DataTemplate local:TradeHistory}"
+        Route="TradeHistory" />
 
 </Shell>
