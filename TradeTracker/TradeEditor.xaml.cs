@@ -1,12 +1,18 @@
-﻿namespace TradeTracker;
+﻿using TradeTracker.ViewModel;
+
+namespace TradeTracker;
 
 public partial class TradeEditor : ContentPage
 {
-	int count = 0;
+	
+	private TradeEditorViewModel ViewModel;
 
 	public TradeEditor()
 	{
+		this.ViewModel = new TradeEditorViewModel();
+		this.BindingContext = this.ViewModel;
 		InitializeComponent();
+		this.ViewModel.Clear();
 	}
 
 }
