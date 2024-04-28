@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:TradeTracker.Behaviour"
              x:Class="TradeTracker.TradeEditor">
 
-    <ScrollView>
+    <ScrollView Padding="8">
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -21,68 +21,67 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="1"
-                Text="Effective Date" />
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Text="On" />
             <DatePicker
                 Grid.Row="1"
-                Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Date="{Binding Date}" />
             
             <Picker
                 Grid.Row="2"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 ItemsSource="{Binding Directions}"
                 SelectedItem="{Binding Direction}" />
 
             <Picker
                 Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 ItemsSource="{Binding Partners}"
                 SelectedItem="{Binding SelectedPartner}" />
 
             <Label
                 Grid.Row="4"
-                Grid.Column="0"
                 Grid.ColumnSpan="1"
                 Text="At a price of" />
+            
             <Entry
-                Grid.Row="4"
-                Grid.Column="1"
-                Grid.ColumnSpan="1" />
+                Grid.Row="5"
+                Grid.ColumnSpan="1"
+                Keyboard="Numeric"
+                HorizontalTextAlignment="End">
+                <Entry.Behaviors>
+                    <b:CurrencyFormatBehaviour />
+                </Entry.Behaviors>
+            </Entry>
             <Picker
-                Grid.Row="4"
-                Grid.Column="2"
+                Grid.Row="5"
+                Grid.Column="1"
                 Grid.ColumnSpan="1"
                 ItemsSource="{Binding Currencies}"
                 SelectedItem="{Binding SelectedCurrency}">
             </Picker>
 
             <Label
-                Grid.Row="5"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
                 Text="The following items:" />
 
             <Editor
-                Grid.Row="6"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.Row="7"
+                Grid.ColumnSpan="2"
                 HeightRequest="150"
                 AutoSize="TextChanges"
                 Text="{Binding Description}" />
             
             <Button
-                Grid.Row="7"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.Row="8"
+                Grid.ColumnSpan="2"
                 Text="Save" />
 
         </Grid>

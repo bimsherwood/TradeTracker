@@ -55,7 +55,14 @@ public class TradeEditorViewModel : BindableObject {
         }
     }
     
-    // PRICE
+    private string _price;
+    public string Price {
+        get { return this._price; }
+        set {
+            this._price = value;
+            OnPropertyChanged();
+        }
+    }
 
     private ObservableCollection<string> _currencies;
     public ObservableCollection<string> Currencies {
