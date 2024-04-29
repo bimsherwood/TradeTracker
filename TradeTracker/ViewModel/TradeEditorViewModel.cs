@@ -102,7 +102,7 @@ public class TradeEditorViewModel : BindableObject {
 
         this.Partners = new ObservableCollection<string>();
         this.Partners.Add("Bim Sherwood");
-        this.Partners.Add("Gumbo");
+        this.Partners.Add("Grumbo");
         this.SelectedPartner = "Bim Sherwood";
 
         this.Currencies = new ObservableCollection<string>();
@@ -112,7 +112,7 @@ public class TradeEditorViewModel : BindableObject {
         this.SelectedCurrency = "AUD";
 
         this.Date = DateTime.Today.AddDays(-1);
-        this.Description = "Wow, a thing!";
+        this.Description = "";
 
     }
 
