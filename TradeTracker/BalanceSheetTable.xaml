@@ -44,7 +44,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 FontAttributes="Bold"
-                Text="Position" />
+                Text="I Owe" />
 
             <BoxView
                 Grid.Row="3"

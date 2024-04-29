@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TradeTracker.TradeHistoryTransactions">
+
+    <VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="1" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    FontAttributes="Bold"
+                    Text="{Binding Currency}" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    Text="Date" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="Price" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="Balance" />
+
+                <BoxView
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Color="Black"
+                    HeightRequest="1"
+                    CornerRadius="0" />
+                    
+            </Grid>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            BindableLayout.ItemsSource="{Binding Transactions}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{Binding Path=Date, StringFormat='{0:MMM dd, yy}'}" />
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            TextColor="{Binding PriceColour}"
+                            Text="{Binding Path=Price, StringFormat='{0:F2}'}" />
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            HorizontalOptions="End"
+                            TextColor="{Binding BalanceColour}"
+                            Text="{Binding Path=Balance, StringFormat='{0:F2}'}" />
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            TextColor="#777777"
+                            Padding="8,0,0,0"
+                            Text="{Binding Description}" />
+
+                        <BoxView
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Color="#CCCCCC"
+                            HeightRequest="1"
+                            CornerRadius="0" />
+                            
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </VerticalStackLayout>
+    
+    </VerticalStackLayout>
+
+</ContentView>

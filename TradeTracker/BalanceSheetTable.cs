@@ -6,7 +6,6 @@ public partial class BalanceSheetTable : ContentView
 {
 	
 	public BalanceSheetTable() {
-		this.BindingContext = new BalanceSheetViewModel();
 		InitializeComponent();
 	}
 
