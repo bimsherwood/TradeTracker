@@ -1,23 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TradeTracker"
              x:Class="TradeTracker.BalanceSheet">
 
-    <ScrollView>
+    <ScrollView Padding="8">
         <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Label
-                Text="Balance sheet"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Button
-                Text="Print"
-                HorizontalOptions="Center" />
-
+            Spacing="16"
+            BindableLayout.ItemsSource="{Binding BalanceSheets}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <local:BalanceSheetTable />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
         </VerticalStackLayout>
     </ScrollView>
 

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TradeTracker.BalanceSheetTable">
+
+    <VerticalStackLayout>
+
+        <!-- Titles -->
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                FontAttributes="Bold"
+                Text="{Binding Currency}" />
+
+            <BoxView
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Color="#CCCCCC"
+                HeightRequest="1"
+                CornerRadius="0" />
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                FontAttributes="Bold"
+                Text="Account" />
+                
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                FontAttributes="Bold"
+                Text="Position" />
+
+            <BoxView
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Color="Black"
+                HeightRequest="1"
+                CornerRadius="0" />
+
+        </Grid>
+
+        <VerticalStackLayout
+            BindableLayout.ItemsSource="{Binding Rows}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{Binding AccountName}" />
+                            
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            TextColor="{Binding BalanceColour}"
+                            HorizontalOptions="End"
+                            Text="{Binding Path=Balance, StringFormat='{0:F2}'}" />
+                        
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Color="#CCCCCC"
+                            HeightRequest="1"
+                            CornerRadius="0" />
+
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </VerticalStackLayout>
+    
+        <!-- Totals -->
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                FontAttributes="Bold"
+                Text="Total" />
+                
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                TextColor="{Binding TotalColour}"
+                FontAttributes="Bold"
+                HorizontalOptions="End"
+                Text="{Binding Path=Total, StringFormat='{0:F2}'}" />
+            
+            <BoxView
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Color="#CCCCCC"
+                HeightRequest="1"
+                CornerRadius="0" />
+
+        </Grid>
+    </VerticalStackLayout>
+
+</ContentView>

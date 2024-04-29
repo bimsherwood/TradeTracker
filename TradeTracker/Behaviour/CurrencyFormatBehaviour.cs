@@ -9,6 +9,7 @@ public class CurrencyFormatBehaviour : Behavior<Entry>
     {
         entry.TextChanged += OnEntryTextChanged;
         entry.Focused += OnEntryFocused;
+        CorrectEntry(entry, entry.Text ?? DefaultText);
         base.OnAttachedTo(entry);
     }
 
