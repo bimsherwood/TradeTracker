@@ -4,8 +4,9 @@ namespace TradeTracker.ViewModel;
 
 public class TradeHistoryBalanceViewModel : BindableObject {
     
-    public TradeHistoryBalanceViewModel() {
-        
+    public TradeHistoryBalanceViewModel(string currency, double balance) {
+        this.Currency = currency;
+        this.Balance = balance;
     }
     
     #region Properties

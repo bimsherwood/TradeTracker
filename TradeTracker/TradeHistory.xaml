@@ -28,6 +28,7 @@
         <Picker
             Grid.Row="0"
             Grid.Column="0"
+            SelectedIndexChanged="PartnerSelectionChanged"
             ItemsSource="{Binding PartnerOptions}"
             SelectedItem="{Binding PartnerSelected}" />
 

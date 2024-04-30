@@ -137,7 +137,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
             }
         });
 
-        await Shell.Current.GoToAsync($"..?partner={this.SelectedPartner}");
+        await Shell.Current.GoToAsync($"..", new Dictionary<string, object>{ { "partner", this.SelectedPartner } });
 
     }
 

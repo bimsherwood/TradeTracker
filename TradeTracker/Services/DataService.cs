@@ -11,38 +11,32 @@ public class DataService {
         SQLite.SQLiteOpenFlags.Create |
         SQLite.SQLiteOpenFlags.SharedCache;
 
-    private static bool Initialised = false;
+    private SQLite.SQLiteAsyncConnection Connection;
 
-    private static async Task<SQLite.SQLiteAsyncConnection> Open(){
+    private async Task<SQLite.SQLiteAsyncConnection> Open(){
         var appData = FileSystem.Current.AppDataDirectory;
         if(!Directory.Exists(appData)){
             Directory.CreateDirectory(appData);
         }
         var databaseFile = Path.Combine(appData, DatabaseFilename);
-        var db = new SQLite.SQLiteAsyncConnection(databaseFile, Flags);
-        if (!Initialised){
-            await db.CreateTableAsync<TransactionDataModel>();
-            Initialised = true;
+        if (this.Connection == null){
+            this.Connection = new SQLite.SQLiteAsyncConnection(databaseFile, Flags);
+            await this.Connection.CreateTableAsync<TransactionDataModel>();
         }
-        return db;
+        return this.Connection;
     }
 
     public async Task Operation(Func<SQLite.SQLiteAsyncConnection, Task> op){
         var db = await Open();
-        try {
-            await op(db); 
-        } finally {
-            await db.CloseAsync();
-        }
+        await op(db); 
+        await db.CloseAsync();
     }
 
     public async Task<T> Operation<T>(Func<SQLite.SQLiteAsyncConnection, Task<T>> op){
         var db = await Open();
-        try {
-            return await op(db); 
-        } finally {
-            await db.CloseAsync();
-        }
+        var result = await op(db); 
+        await db.CloseAsync();
+        return result;
     }
 
 }

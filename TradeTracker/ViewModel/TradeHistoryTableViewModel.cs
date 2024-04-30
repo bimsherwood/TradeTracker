@@ -4,8 +4,9 @@ namespace TradeTracker.ViewModel;
 
 public class TradeHistoryTableViewModel : BindableObject {
     
-    public TradeHistoryTableViewModel(){
-        this.Transactions = new ObservableCollection<TradeHistoryRowViewModel>();
+    public TradeHistoryTableViewModel(string currency, List<TradeHistoryRowViewModel> transactions){
+        this.Currency = currency;
+        this.Transactions = new ObservableCollection<TradeHistoryRowViewModel>(transactions);
     }
     
     #region Properties

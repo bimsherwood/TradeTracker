@@ -1,11 +1,14 @@
-using System.Collections.ObjectModel;
+using TradeTracker.DataModel;
 
 namespace TradeTracker.ViewModel;
 
 public class TradeHistoryRowViewModel : BindableObject {
     
-    public TradeHistoryRowViewModel() {
-        
+    public TradeHistoryRowViewModel(TransactionDataModel transaction, double runningBalance) {
+        this.Date = transaction.Date;
+        this.Price = transaction.Price;
+        this.Description = transaction.Description;
+        this.Balance = runningBalance;
     }
     
     #region Properties
