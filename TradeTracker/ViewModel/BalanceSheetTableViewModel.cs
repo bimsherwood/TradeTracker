@@ -4,8 +4,10 @@ namespace TradeTracker.ViewModel;
 
 public class BalanceSheetTableViewModel : BindableObject {
 
-    public BalanceSheetTableViewModel(){
-        this.Rows = new ObservableCollection<BalanceSheetRowViewModel>();
+    public BalanceSheetTableViewModel(string currency, List<BalanceSheetRowViewModel> transactions){
+        this.Currency = currency;
+        this.Rows = new ObservableCollection<BalanceSheetRowViewModel>(transactions);
+        this.Total = transactions.Sum(o => o.Balance);
     }
 
     #region Properties

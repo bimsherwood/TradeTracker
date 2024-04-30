@@ -70,7 +70,7 @@ public class CurrencyFormatBehaviour : Behavior<Entry>
         // Correct the entry format
         if(entry.Text != newValueFormatted){
             entry.Text = newValueFormatted;
-            entry.CursorPosition = newValueFormatted.Length;
+            entry.CursorPosition = newValueFormatted.Length + 1;
         }
 
     }

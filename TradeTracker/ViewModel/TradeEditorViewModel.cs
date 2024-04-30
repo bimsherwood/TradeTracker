@@ -137,7 +137,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
             }
         });
 
-        await Shell.Current.GoToAsync($"//TradeHistory?partner={this.SelectedPartner}");
+        await Shell.Current.GoToAsync($"..?partner={this.SelectedPartner}");
 
     }
 
@@ -189,7 +189,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
         this.Direction = "I Gave";
         this.SelectedPartner = "Bim Sherwood";
         this.SelectedCurrency = "AUD";
-        this.Date = DateTime.Today.AddDays(-1);
+        this.Date = DateTime.Today;
         this.Description = "";
 
     }
