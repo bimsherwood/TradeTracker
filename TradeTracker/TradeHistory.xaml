@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:TradeTracker"
              x:Class="TradeTracker.TradeHistory">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            IconImageSource="plus.png"
+            Command="{Binding NewTradeCommand}"
+            Text="New Trade">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <Grid Padding="8">
         
         <Grid.RowDefinitions>

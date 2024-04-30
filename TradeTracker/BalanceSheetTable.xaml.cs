@@ -1,6 +1,4 @@
-﻿using TradeTracker.ViewModel;
-
-namespace TradeTracker;
+﻿namespace TradeTracker;
 
 public partial class BalanceSheetTable : ContentView
 {

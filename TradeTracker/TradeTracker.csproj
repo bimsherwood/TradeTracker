@@ -15,7 +15,7 @@
 		<ApplicationTitle>TradeTracker</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.bimmosherwood.tradetracker</ApplicationId>
+		<ApplicationId>au.com.bimmosherwood.tradetracker</ApplicationId>
 		<ApplicationIdGuid>7d7e042d-6e5d-4585-8367-753a5b4fcf33</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -49,6 +49,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
 </Project>

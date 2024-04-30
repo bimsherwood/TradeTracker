@@ -14,9 +14,5 @@
         Title="Trade History"
         ContentTemplate="{DataTemplate local:TradeHistory}"
         Route="TradeHistory" />
-    <ShellContent
-        Title="Trade Editor"
-        ContentTemplate="{DataTemplate local:TradeEditor}"
-        Route="TradeEditor" />
 
 </Shell>

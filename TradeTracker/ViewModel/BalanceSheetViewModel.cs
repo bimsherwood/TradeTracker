@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace TradeTracker.ViewModel;
 
@@ -21,4 +22,12 @@ public class BalanceSheetViewModel : BindableObject {
 
     #endregion
 
+    #region Commands
+
+    public ICommand NewTradeCommand => new Command(NewTrade);
+    private async void NewTrade(){
+        await Shell.Current.GoToAsync("TradeEditor?id=new");
+    }
+
+    #endregion
 }

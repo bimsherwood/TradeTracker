@@ -1,8 +1,9 @@
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace TradeTracker.ViewModel;
 
-public class TradeHistoryViewModel : BindableObject {
+public class TradeHistoryViewModel : BindableObject, IQueryAttributable {
     
     public TradeHistoryViewModel(){
         this.PartnerOptions = new ObservableCollection<string>();
@@ -49,5 +50,19 @@ public class TradeHistoryViewModel : BindableObject {
     }
 
     #endregion
+
+    #region Commands
+
+    public ICommand NewTradeCommand => new Command(NewTrade);
+    private async void NewTrade(){
+        await Shell.Current.GoToAsync("TradeEditor?id=new");
+    }
+
+    #endregion
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        this.PartnerSelected = query["partner"] as string;
+    }
 
 }

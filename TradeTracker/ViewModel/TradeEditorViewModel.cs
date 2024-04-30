@@ -1,14 +1,34 @@
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using TradeTracker.DataModel;
+using TradeTracker.Services;
 
 namespace TradeTracker.ViewModel;
 
-public class TradeEditorViewModel : BindableObject {
+public class TradeEditorViewModel : BindableObject, IQueryAttributable {
 
-    public TradeEditorViewModel() {
+    private const string IGave = "I Gave";
+    private const string IReceivedFrom = "I Received From";
 
+    private DataService DataService;
+    private TransactionDataModel Transaction;
+
+    public TradeEditorViewModel(DataService dataService)
+    {
+        this.DataService = dataService;
+        this.Transaction = null;
     }
 
     #region Properties
+
+    private string _title;
+    public string Title {
+        get { return this._title; }
+        set {
+            this._title = value;
+            OnPropertyChanged();
+        }
+    }
 
     private DateTime _date;
     public DateTime Date {
@@ -93,26 +113,99 @@ public class TradeEditorViewModel : BindableObject {
 
     #endregion
 
-    public void Clear(){
+    #region Commands
 
-        this.Directions = new ObservableCollection<string>();
-        this.Directions.Add("I Gave");
-        this.Directions.Add("I Received From");
+    public ICommand SaveCommand => new Command(Save);
+    private async void Save(){
+
+        var price = double.Parse(this.Price);
+        if(this.Direction == IGave){
+            price *= -1;
+        }
+
+        this.Transaction.Date = this.Date;
+        this.Transaction.Partner = this.SelectedPartner;
+        this.Transaction.Price = price;
+        this.Transaction.Currency = this.SelectedCurrency;
+        this.Transaction.Description = this.Description;
+
+        await this.DataService.Operation(async db => {
+            if(this.Transaction.Id == 0){
+                await db.InsertAsync(this.Transaction);
+            } else {
+                await db.UpdateAsync(this.Transaction);
+            }
+        });
+
+        await Shell.Current.GoToAsync($"//TradeHistory?partner={this.SelectedPartner}");
+
+    }
+
+    #endregion
+
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+
+        // TODO: Load these
+        var partners = new List<string>() { "Bim Sherwood", "Grumbo" };
+        var currencies = new List<string>() { "AUD", "USD", "EUR" };
+
+        var transaction = await LoadTransaction(query);
+        UpdateOptions(partners, currencies);
+        if(transaction != null){
+            LoadTransaction(transaction);
+        } else {
+            LoadBlankTransaction();
+        }
+    }
+
+    private async Task<TransactionDataModel> LoadTransaction(IDictionary<string, object> query){
+        var idArg = query["id"] as string;
+        if(int.TryParse(idArg, out int id)){
+            var transactions = await this.DataService.Operation(async db =>
+                await db.Table<TransactionDataModel>()
+                .Where(o => o.Id == id)
+                .ToListAsync());
+            return transactions.SingleOrDefault();
+        } else {
+            return null;
+        }
+    }
+
+    private void UpdateOptions(
+            List<string> partners,
+            List<string> currencies){
+        this.Directions = new ObservableCollection<string>(new[]{ IGave, IReceivedFrom });
+        this.Partners = new ObservableCollection<string>(partners);
+        this.Currencies = new ObservableCollection<string>(currencies);
+    }
+
+    private void LoadBlankTransaction(){
+
+        this.Title = "New Trade";
+
+        this.Transaction = new TransactionDataModel();
+
         this.Direction = "I Gave";
-
-        this.Partners = new ObservableCollection<string>();
-        this.Partners.Add("Bim Sherwood");
-        this.Partners.Add("Grumbo");
         this.SelectedPartner = "Bim Sherwood";
-
-        this.Currencies = new ObservableCollection<string>();
-        this.Currencies.Add("AUD");
-        this.Currencies.Add("USD");
-        this.Currencies.Add("EUR");
         this.SelectedCurrency = "AUD";
-
         this.Date = DateTime.Today.AddDays(-1);
         this.Description = "";
+
+    }
+
+    private void LoadTransaction(TransactionDataModel transaction){
+
+        this.Title = "Edit Trade";
+
+        this.Transaction = transaction;
+
+        this.Date = transaction.Date;
+        this.Direction = transaction.Price < 0 ? IGave : IReceivedFrom;
+        this.SelectedPartner = transaction.Partner;
+        this.Price = Math.Abs(transaction.Price).ToString();
+        this.SelectedCurrency = transaction.Currency;
+        this.Description = transaction.Description;
 
     }
 

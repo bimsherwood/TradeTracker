@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:TradeTracker.Behaviour"
-             x:Class="TradeTracker.TradeEditor">
+             x:Class="TradeTracker.TradeEditor"
+             Title="{Binding Title}">
 
     <ScrollView Padding="8">
         <Grid>
@@ -55,7 +56,8 @@
                 Grid.Row="5"
                 Grid.ColumnSpan="1"
                 Keyboard="Numeric"
-                HorizontalTextAlignment="End">
+                HorizontalTextAlignment="End"
+                Text="{Binding Price}">
                 <Entry.Behaviors>
                     <b:CurrencyFormatBehaviour />
                 </Entry.Behaviors>
@@ -83,6 +85,7 @@
             <Button
                 Grid.Row="8"
                 Grid.ColumnSpan="2"
+                Command="{Binding SaveCommand}"
                 Text="Save" />
 
         </Grid>

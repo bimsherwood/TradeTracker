@@ -22,7 +22,7 @@ public class CurrencyFormatBehaviour : Behavior<Entry>
 
     private void OnEntryFocused(object sender, FocusEventArgs e){
         if(sender is Entry entry){
-            CorrectEntry(entry, entry.Text ?? "");
+            CorrectEntry(entry, entry.Text);
         }
     }
 
@@ -35,7 +35,9 @@ public class CurrencyFormatBehaviour : Behavior<Entry>
 
     private void CorrectEntry(Entry entry, string candidateTextValue){
 
-        var parts = candidateTextValue.Split(".");
+        var denulled = candidateTextValue ?? "";
+
+        var parts = denulled.Split(".");
         
         // Add a decimal part if the decimal point is missing
         if(parts.Length == 1){
@@ -66,9 +68,10 @@ public class CurrencyFormatBehaviour : Behavior<Entry>
         var newValueFormatted = newValue.ToString("0.00");
 
         // Correct the entry format
-        entry.Text = newValueFormatted;
-        entry.CursorPosition = entry.Text.Length;
-        return;
+        if(entry.Text != newValueFormatted){
+            entry.Text = newValueFormatted;
+            entry.CursorPosition = newValueFormatted.Length;
+        }
 
     }
     
