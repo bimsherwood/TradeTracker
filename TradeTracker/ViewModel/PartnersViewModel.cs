@@ -32,8 +32,11 @@ public class PartnersViewModel : BindableObject {
 
     public ICommand NewSettingCommand => new Command(NewSetting);
     private async void NewSetting() {
-        ;
-        //await Shell.Current.GoToAsync("TradeEditor?id=new");
+        string partnerName = await App.Current.MainPage.DisplayPromptAsync("New Trade Partner", "Trader Name:");
+        var partner = new PartnerDataModel();
+        partner.Name = partnerName;
+        await this.Database.Operation(async db => await db.InsertOrReplaceAsync(partner)); 
+        await RefreshList();
     }
 
     #endregion
