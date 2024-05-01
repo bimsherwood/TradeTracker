@@ -74,11 +74,14 @@ public class TradeHistoryViewModel : BindableObject, IQueryAttributable {
     }
 
     public async Task OnScreenAppearing() {
-        // TODO: Load these
-        var partners = new List<string>() { "Bim Sherwood", "Grumbo", "Libniz" };
-        this.PartnerOptions = new ObservableCollection<string>(partners);
+        var partners = await this.DataService.Operation(async db =>
+            await db.Table<PartnerDataModel>()
+            .OrderBy(o => o.Name)
+            .ToListAsync());
+        var partnerNames = partners.Select(o => o.Name).ToList();
+        this.PartnerOptions = new ObservableCollection<string>(partnerNames);
         // The selection is cleared by the above operation, undo this: 
-        this.PartnerSelected = this.PartnerLoaded ?? partners.First();
+        this.PartnerSelected = this.PartnerLoaded ?? partnerNames.FirstOrDefault();
     }
 
     public async Task OnPartnerChanged() {
@@ -97,12 +100,15 @@ public class TradeHistoryViewModel : BindableObject, IQueryAttributable {
             this.PartnerLoaded = partner;
         }
 
-        // TODO: Load this
-        var currencies = new List<string>() { "AUD", "USD", "EUR" };
+        var currencies = await this.DataService.Operation(async db =>
+            await db.Table<CurrencyDataModel>()
+            .OrderBy(o => o.Name)
+            .ToListAsync());
+        var currencyNames = currencies.Select(o => o.Name).ToList();
 
         var balances = new List<TradeHistoryBalanceViewModel>();
         var tables = new List<TradeHistoryTableViewModel>();
-        foreach(var currency in currencies) {
+        foreach(var currency in currencyNames) {
 
             // Load the balance
             var balance = await this.DataService.Operation(async db =>

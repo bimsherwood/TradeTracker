@@ -146,12 +146,19 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
 
-        // TODO: Load these
-        var partners = new List<string>() { "Bim Sherwood", "Grumbo" };
-        var currencies = new List<string>() { "AUD", "USD", "EUR" };
+        var partners = await this.DataService.Operation(async db =>
+            await db.Table<PartnerDataModel>()
+            .OrderBy(o => o.Name)
+            .ToListAsync());
+        var partnerNames = partners.Select(o => o.Name).ToList();
+        var currencies = await this.DataService.Operation(async db =>
+            await db.Table<CurrencyDataModel>()
+            .OrderBy(o => o.Name)
+            .ToListAsync());
+        var currencyNames = currencies.Select(o => o.Name).ToList();
 
         var transaction = await LoadTransaction(query);
-        UpdateOptions(partners, currencies);
+        UpdateOptions(partnerNames, currencyNames);
         if(transaction != null){
             LoadTransaction(transaction);
         } else {
@@ -186,9 +193,9 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
 
         this.Transaction = new TransactionDataModel();
 
-        this.Direction = "I Gave";
-        this.SelectedPartner = "Bim Sherwood";
-        this.SelectedCurrency = "AUD";
+        this.Direction = IGave;
+        this.SelectedPartner = this.Partners.FirstOrDefault();
+        this.SelectedCurrency = this.Currencies.FirstOrDefault();
         this.Date = DateTime.Today;
         this.Description = "";
 
