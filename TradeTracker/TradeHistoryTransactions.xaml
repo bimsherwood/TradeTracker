@@ -76,6 +76,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding TradeTappedCommand}"
+                                NumberOfTapsRequired="1" />
+                        </Grid.GestureRecognizers>
+
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"

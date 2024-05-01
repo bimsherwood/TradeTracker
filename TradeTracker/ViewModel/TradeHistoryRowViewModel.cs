@@ -1,10 +1,14 @@
+using System.Windows.Input;
 using TradeTracker.DataModel;
 
 namespace TradeTracker.ViewModel;
 
 public class TradeHistoryRowViewModel : BindableObject {
     
+    private TransactionDataModel Transaction;
+
     public TradeHistoryRowViewModel(TransactionDataModel transaction, double runningBalance) {
+        this.Transaction = transaction;
         this.Date = transaction.Date;
         this.Price = transaction.Price;
         this.Description = transaction.Description;
@@ -57,6 +61,15 @@ public class TradeHistoryRowViewModel : BindableObject {
             this._description = value;
             OnPropertyChanged();
         }
+    }
+
+    #endregion
+
+    #region Commands 
+
+    public ICommand TradeTappedCommand => new Command(TradeTapped);
+    private async void TradeTapped() {
+        await Shell.Current.GoToAsync($"TradeEditor?id={this.Transaction.Id}");
     }
 
     #endregion

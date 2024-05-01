@@ -203,7 +203,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
         this.Date = transaction.Date;
         this.Direction = transaction.Price < 0 ? IGave : IReceivedFrom;
         this.SelectedPartner = transaction.Partner;
-        this.Price = Math.Abs(transaction.Price).ToString();
+        this.Price = Math.Abs(transaction.Price).ToString("F2");
         this.SelectedCurrency = transaction.Currency;
         this.Description = transaction.Description;
 
