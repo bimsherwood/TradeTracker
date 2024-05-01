@@ -15,5 +15,19 @@
         Title="Trade History"
         ContentTemplate="{DataTemplate page:TradeHistory}"
         Route="TradeHistory" />
+    <FlyoutItem Title="Settings!"
+                Icon="dog.png"
+                Route="Settings">
+       <Tab>
+            <ShellContent
+                Title="Settings1"
+                ContentTemplate="{DataTemplate page:Settings}"
+                Route="Settings1" />
+            <ShellContent
+                Title="Settings2"
+                ContentTemplate="{DataTemplate page:Settings}"
+                Route="Settings2" />
+       </Tab>
+    </FlyoutItem>
 
 </Shell>
