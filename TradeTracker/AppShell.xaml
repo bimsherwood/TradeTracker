@@ -34,12 +34,17 @@
         <Tab Title="Partners">
             <ShellContent
                 ContentTemplate="{DataTemplate settings:Partners}"
-                Route="PartnersRoute" />
+                Route="Partners" />
         </Tab>
         <Tab Title="Currencies">
             <ShellContent
                 ContentTemplate="{DataTemplate settings:Currencies}"
-                Route="CurrenciesRoute" />
+                Route="Currencies" />
+        </Tab>
+        <Tab Title="Reset">
+            <ShellContent
+                ContentTemplate="{DataTemplate settings:Reset}"
+                Route="Reset" />
         </Tab>
     </FlyoutItem>
 
