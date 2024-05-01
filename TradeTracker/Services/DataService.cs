@@ -22,6 +22,8 @@ public class DataService {
         if (this.Connection == null){
             this.Connection = new SQLite.SQLiteAsyncConnection(databaseFile, Flags);
             await this.Connection.CreateTableAsync<TransactionDataModel>();
+            await this.Connection.CreateTableAsync<CurrencyDataModel>();
+            await this.Connection.CreateTableAsync<PartnerDataModel>();
         }
         return this.Connection;
     }

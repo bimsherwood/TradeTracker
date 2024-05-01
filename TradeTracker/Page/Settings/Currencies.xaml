@@ -14,18 +14,15 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView Padding="8">
-        <!--
         <VerticalStackLayout
             Spacing="16"
-            BindableLayout.ItemsSource="{Binding BalanceSheets}">
+            BindableLayout.ItemsSource="{Binding Currencies}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <page:BalanceSheetTable />
+                    <Label Text="{Binding .}" />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </VerticalStackLayout>
-        -->
-        <Label Text="Currencies!" />
     </ScrollView>
 
 </ContentPage>
