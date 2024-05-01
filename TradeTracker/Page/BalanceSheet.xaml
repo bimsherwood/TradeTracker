@@ -12,16 +12,25 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ScrollView Padding="8">
-        <VerticalStackLayout
-            Spacing="16"
-            BindableLayout.ItemsSource="{Binding BalanceSheets}">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <page:BalanceSheetTable />
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </VerticalStackLayout>
-    </ScrollView>
+    <VerticalStackLayout>
+
+        <ScrollView Padding="8">
+            <VerticalStackLayout
+                Spacing="16"
+                BindableLayout.ItemsSource="{Binding BalanceSheets}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <page:BalanceSheetTable />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Label
+             Padding="8"
+             IsVisible="{Binding IsEmpty}"
+             Text="Add your first Currency and Trading Partner from the Settings screen." />
+
+    </VerticalStackLayout>
 
 </ContentPage>

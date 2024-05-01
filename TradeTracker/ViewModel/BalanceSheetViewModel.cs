@@ -22,7 +22,12 @@ public class BalanceSheetViewModel : BindableObject {
         set {
             this._balanceSheets = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(IsEmpty));
         }
+    }
+
+    public bool IsEmpty {
+        get { return !this._balanceSheets.Any(); }
     }
 
     #endregion
@@ -43,8 +48,7 @@ public class BalanceSheetViewModel : BindableObject {
             .OrderBy(o => o.Name)
             .ToListAsync());
         var partnerNames = partners.Select(o => o.Name).ToList();
-        var currencies = await this.DataService.Operation(async db =>
-            await db.Table<CurrencyDataModel>()
+        var currencies = await this.DataService.Operation(async db => await db.Table<CurrencyDataModel>()
             .OrderBy(o => o.Name)
             .ToListAsync());
         var currencyNames = currencies.Select(o => o.Name).ToList();
