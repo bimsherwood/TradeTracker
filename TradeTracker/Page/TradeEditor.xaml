@@ -59,7 +59,7 @@
                 HorizontalTextAlignment="End"
                 Text="{Binding Price}">
                 <Entry.Behaviors>
-                    <b:CurrencyFormatBehaviour />
+                    <b:CurrencyFormatDelayedBehaviour />
                 </Entry.Behaviors>
             </Entry>
             <Picker

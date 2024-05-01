@@ -1,38 +1,26 @@
 namespace TradeTracker.Behaviour;
 
-/// <summary>
-/// The cursor position does not adjust properly on Android!
-/// </summary>
-public class CurrencyFormatBehaviour : Behavior<Entry>
+public class CurrencyFormatDelayedBehaviour : Behavior<Entry>
 {
 
     private const string DefaultText = "0.00";
 
     protected override void OnAttachedTo(Entry entry)
     {
-        entry.TextChanged += OnEntryTextChanged;
-        entry.Focused += OnEntryFocused;
+        entry.Unfocused += OnEntryUnfocused;
         CorrectEntry(entry, entry.Text ?? DefaultText);
         base.OnAttachedTo(entry);
     }
 
     protected override void OnDetachingFrom(Entry entry)
     {
-        entry.TextChanged -= OnEntryTextChanged;
-        entry.Focused -= OnEntryFocused;
+        entry.Unfocused -= OnEntryUnfocused;
         base.OnDetachingFrom(entry);
     }
 
-    private void OnEntryFocused(object sender, FocusEventArgs e){
+    private void OnEntryUnfocused(object sender, FocusEventArgs e){
         if(sender is Entry entry){
             CorrectEntry(entry, entry.Text);
-        }
-    }
-
-    private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
-    {
-        if(sender is Entry entry){
-            CorrectEntry(entry, args.NewTextValue);
         }
     }
 
@@ -64,16 +52,13 @@ public class CurrencyFormatBehaviour : Behavior<Entry>
             wholePart = "0";
         }
 
-        // Shift the value to 2 decimal places
-        var multiplier = Math.Pow(10, decimalPart.Length - 2);
-        double.TryParse($"{wholePart}.{decimalPart}", out var currentValue);
-        var newValue = currentValue * multiplier;
+        // Format the value to 2 decimal places
+        double.TryParse($"{wholePart}.{decimalPart}", out var newValue);
         var newValueFormatted = newValue.ToString("0.00");
 
         // Correct the entry format
         if(entry.Text != newValueFormatted){
             entry.Text = newValueFormatted;
-            entry.CursorPosition = newValueFormatted.Length + 1;
         }
 
     }

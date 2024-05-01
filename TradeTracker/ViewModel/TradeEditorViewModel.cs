@@ -195,6 +195,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
 
         this.Direction = IGave;
         this.SelectedPartner = this.Partners.FirstOrDefault();
+        this.Price = "0.00";
         this.SelectedCurrency = this.Currencies.FirstOrDefault();
         this.Date = DateTime.Today;
         this.Description = "";
