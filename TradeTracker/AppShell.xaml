@@ -5,29 +5,42 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TradeTracker"
     xmlns:page="clr-namespace:TradeTracker.Page"
+    xmlns:settings="clr-namespace:TradeTracker.Page.Settings"
     Shell.FlyoutBehavior="Flyout">
     
-    <ShellContent
+    <FlyoutItem
         Title="Balance Sheet"
-        ContentTemplate="{DataTemplate page:BalanceSheet}"
-        Route="BalanceSheet" />
-    <ShellContent
+        Route="BalanceSheet">
+        <Tab>
+            <ShellContent
+                Title="Balance Sheet"
+                ContentTemplate="{DataTemplate page:BalanceSheet}"
+                Route="BalanceSheet" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
         Title="Trade History"
-        ContentTemplate="{DataTemplate page:TradeHistory}"
-        Route="TradeHistory" />
-    <FlyoutItem Title="Settings!"
-                Icon="dog.png"
-                Route="Settings">
-       <Tab>
+        Route="TradeHistory">
+        <Tab>
             <ShellContent
-                Title="Settings1"
-                ContentTemplate="{DataTemplate page:Settings}"
-                Route="Settings1" />
+                Title="Trade History"
+                ContentTemplate="{DataTemplate page:TradeHistory}"
+                Route="TradeHistory" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Settings"
+        Route="Settings">
+        <Tab Title="Partners">
             <ShellContent
-                Title="Settings2"
-                ContentTemplate="{DataTemplate page:Settings}"
-                Route="Settings2" />
-       </Tab>
+                ContentTemplate="{DataTemplate settings:Partners}"
+                Route="PartnersRoute" />
+        </Tab>
+        <Tab Title="Currencies">
+            <ShellContent
+                ContentTemplate="{DataTemplate settings:Currencies}"
+                Route="CurrenciesRoute" />
+        </Tab>
     </FlyoutItem>
 
 </Shell>

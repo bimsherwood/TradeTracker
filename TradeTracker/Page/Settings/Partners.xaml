@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:page="clr-namespace:TradeTracker.Page"
-             x:Class="TradeTracker.Page.Settings">
+             x:Class="TradeTracker.Page.Settings.Partners"
+             Title="Partners">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -24,7 +25,7 @@
             </BindableLayout.ItemTemplate>
         </VerticalStackLayout>
         -->
-        <Label Text="Lobbadob" />
+        <Label Text="Partners!" />
     </ScrollView>
 
 </ContentPage>

@@ -1,14 +1,12 @@
 ﻿using TradeTracker.Services;
 using TradeTracker.ViewModel;
 
-namespace TradeTracker.Page;
+namespace TradeTracker.Page.Settings;
 
-public partial class Settings : ContentPage
+public partial class Currencies : ContentPage
 {
-	
-    private BalanceSheetViewModel ViewModel;
 
-	public Settings()
+	public Currencies()
 	{
 		var database = DependencyService.Get<DataService>();
 		InitializeComponent();
