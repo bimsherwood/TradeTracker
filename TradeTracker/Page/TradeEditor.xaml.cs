@@ -1,7 +1,7 @@
 ﻿using TradeTracker.Services;
 using TradeTracker.ViewModel;
 
-namespace TradeTracker;
+namespace TradeTracker.Page;
 
 public partial class TradeEditor : ContentPage
 {

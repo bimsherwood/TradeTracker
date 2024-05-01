@@ -1,4 +1,4 @@
-﻿namespace TradeTracker;
+﻿namespace TradeTracker.Page;
 
 public partial class TradeHistoryTransactions : ContentView
 {

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:TradeTracker"
-             x:Class="TradeTracker.BalanceSheet">
+             xmlns:page="clr-namespace:TradeTracker.Page"
+             x:Class="TradeTracker.Page.BalanceSheet">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -18,7 +18,7 @@
             BindableLayout.ItemsSource="{Binding BalanceSheets}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <local:BalanceSheetTable />
+                    <page:BalanceSheetTable />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </VerticalStackLayout>

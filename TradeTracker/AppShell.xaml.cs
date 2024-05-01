@@ -1,4 +1,6 @@
-﻿namespace TradeTracker;
+﻿using TradeTracker.Page;
+
+namespace TradeTracker;
 
 public partial class AppShell : Shell
 {
