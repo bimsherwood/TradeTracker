@@ -6,7 +6,7 @@
              Title="{Binding Title}">
 
     <ScrollView Padding="8">
-        <Grid>
+        <Grid RowSpacing="4">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -14,6 +14,8 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -85,8 +87,22 @@
             <Button
                 Grid.Row="8"
                 Grid.ColumnSpan="2"
+                Command="{Binding PhotoCommand}"
+                BackgroundColor="{StaticResource Tertiary}"
+                Text="Photo" />
+            
+            <Button
+                Grid.Row="9"
+                Grid.ColumnSpan="2"
                 Command="{Binding SaveCommand}"
                 Text="Save" />
+                
+            <Grid
+                Grid.Row="10"
+                Grid.ColumnSpan="2"
+                Padding="8">
+                <Image Source="{Binding ImageSource}" />
+            </Grid>
 
         </Grid>
     </ScrollView>

@@ -11,7 +11,9 @@ public partial class TradeEditor : ContentPage
 	public TradeEditor()
 	{
 		var database = DependencyService.Get<DataService>();
-		this.ViewModel = new TradeEditorViewModel(database);
+		var photoService = DependencyService.Get<PhotoService>();
+		var fileService = DependencyService.Get<FileService>();
+		this.ViewModel = new TradeEditorViewModel(database, photoService, fileService);
 		this.BindingContext = this.ViewModel;
 		InitializeComponent();
 	}

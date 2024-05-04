@@ -11,11 +11,18 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
     private const string IReceivedFrom = "I Received From";
 
     private DataService DataService;
+    private PhotoService PhotoService;
+    private FileService FileService;
     private TransactionDataModel Transaction;
 
-    public TradeEditorViewModel(DataService dataService)
+    public TradeEditorViewModel(
+            DataService dataService,
+            PhotoService photoService,
+            FileService fileService)
     {
         this.DataService = dataService;
+        this.PhotoService = photoService;
+        this.FileService = fileService;
         this.Transaction = null;
     }
 
@@ -111,12 +118,26 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
         }
     }
 
+    private ImageSource _imageSource;
+    public ImageSource ImageSource {
+        get { return this._imageSource; }
+        set {
+            this._imageSource = value;
+            OnPropertyChanged();
+        }
+    }
+
     #endregion
 
     #region Commands
 
-    public ICommand SaveCommand => new Command(Save);
-    private async void Save(){
+    public ICommand SaveCommand => new Command(SaveAndClose);
+    private async void SaveAndClose(){
+        await Save();
+        await Shell.Current.GoToAsync($"..", new Dictionary<string, object>{ { "partner", this.SelectedPartner } });
+    }
+
+    private async Task Save() {
 
         var price = double.Parse(this.Price);
         if(this.Direction == IGave){
@@ -137,8 +158,18 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
             }
         });
 
-        await Shell.Current.GoToAsync($"..", new Dictionary<string, object>{ { "partner", this.SelectedPartner } });
+    }
 
+    public ICommand PhotoCommand => new Command(Photo);
+    private async void Photo(){
+        var photo = await this.PhotoService.PromptForPhoto();
+        if (photo != null) {
+            await Save();
+            using(var photoStream = await photo.OpenReadAsync()){
+                await this.FileService.WriteTradePhoto(this.Transaction.Id, photoStream);
+            }
+            this.ImageSource = await this.FileService.LoadImageForTrade(this.Transaction.Id);
+        }
     }
 
     #endregion
@@ -202,7 +233,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
 
     }
 
-    private void LoadTransaction(TransactionDataModel transaction){
+    private async void LoadTransaction(TransactionDataModel transaction){
 
         this.Title = "Edit Trade";
 
@@ -214,6 +245,7 @@ public class TradeEditorViewModel : BindableObject, IQueryAttributable {
         this.Price = Math.Abs(transaction.Price).ToString("F2");
         this.SelectedCurrency = transaction.Currency;
         this.Description = transaction.Description;
+        this.ImageSource = await this.FileService.LoadImageForTrade(transaction.Id);
 
     }
 

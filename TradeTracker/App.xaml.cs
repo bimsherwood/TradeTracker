@@ -8,6 +8,8 @@ public partial class App : Application
 	{
 		UserAppTheme = AppTheme.Light;
 		DependencyService.RegisterSingleton(new DataService());
+		DependencyService.RegisterSingleton(new PhotoService());
+		DependencyService.RegisterSingleton(new FileService());
 		InitializeComponent();
 		MainPage = new AppShell();
 	}

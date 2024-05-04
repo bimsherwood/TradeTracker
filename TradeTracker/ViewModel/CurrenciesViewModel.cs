@@ -33,10 +33,12 @@ public class CurrenciesViewModel : BindableObject {
     public ICommand NewSettingCommand => new Command(NewSetting);
     private async void NewSetting() {
         string currencyName = await App.Current.MainPage.DisplayPromptAsync("New Currency", "Currency Name:");
-        var currency = new CurrencyDataModel();
-        currency.Name = currencyName;
-        await this.Database.Operation(async db => await db.InsertOrReplaceAsync(currency)); 
-        await RefreshList();
+        if(currencyName != null){
+            var currency = new CurrencyDataModel();
+            currency.Name = currencyName;
+            await this.Database.Operation(async db => await db.InsertOrReplaceAsync(currency)); 
+            await RefreshList();
+        }
     }
 
     #endregion
