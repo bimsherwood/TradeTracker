@@ -25,5 +25,12 @@ public class FileService {
         await content.CopyToAsync(file);
     }
 
+    public async Task DeleteAllTradePhotos(){
+        if(Directory.Exists(PhotoFolder)){
+            foreach(var photo in Directory.GetFiles(PhotoFolder)){
+                File.Delete(photo);
+            }
+        }
+    }
 
 }

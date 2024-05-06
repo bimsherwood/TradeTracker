@@ -8,9 +8,11 @@ namespace TradeTracker.ViewModel;
 public class ResetViewModel : BindableObject {
 
     private DataService Database;
+    private FileService FileService;
 
-    public ResetViewModel(DataService database) {
+    public ResetViewModel(DataService database, FileService fileService) {
         this.Database = database;
+        this.FileService = fileService;
     }
 
     #region Properties
@@ -32,6 +34,8 @@ public class ResetViewModel : BindableObject {
                 await db.DeleteAllAsync<PartnerDataModel>();
                 await db.DeleteAllAsync<CurrencyDataModel>();
             });
+            await this.FileService.DeleteAllTradePhotos();
+            await App.Current.MainPage.DisplayAlert("Complete", "Data deleted successfully.", "OK");
         }
     }
 
