@@ -7,6 +7,7 @@
     <Color x:Key="Primary">#005A96</Color>
     <Color x:Key="Secondary">#92C4E5</Color>
     <Color x:Key="Tertiary">#003B63</Color>
+    <Color x:Key="Danger">#BB0000</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray030">#EDEDED</Color>

@@ -3,12 +3,12 @@ using TradeTracker.ViewModel;
 
 namespace TradeTracker.Page.Settings;
 
-public partial class Reset : ContentPage
+public partial class Buttons : ContentPage
 {
 
 	private ResetViewModel ViewModel;
 
-	public Reset()
+	public Buttons()
 	{
 		var database = DependencyService.Get<DataService>();
 		var files = DependencyService.Get<FileService>();

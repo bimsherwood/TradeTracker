@@ -41,10 +41,10 @@
                 ContentTemplate="{DataTemplate settings:Currencies}"
                 Route="Currencies" />
         </Tab>
-        <Tab Title="Reset">
+        <Tab Title="Functions">
             <ShellContent
-                ContentTemplate="{DataTemplate settings:Reset}"
-                Route="Reset" />
+                ContentTemplate="{DataTemplate settings:Buttons}"
+                Route="Buttons" />
         </Tab>
     </FlyoutItem>
 
