@@ -12,7 +12,8 @@ public partial class Reset : ContentPage
 	{
 		var database = DependencyService.Get<DataService>();
 		var files = DependencyService.Get<FileService>();
-		this.ViewModel = new ResetViewModel(database, files);
+		var csvService = DependencyService.Get<CsvService>();
+		this.ViewModel = new ResetViewModel(database, files, csvService);
 		this.BindingContext = this.ViewModel;
 		InitializeComponent();
 	}

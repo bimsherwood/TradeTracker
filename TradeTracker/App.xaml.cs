@@ -10,6 +10,7 @@ public partial class App : Application
 		DependencyService.RegisterSingleton(new DataService());
 		DependencyService.RegisterSingleton(new PhotoService());
 		DependencyService.RegisterSingleton(new FileService());
+		DependencyService.RegisterSingleton(new CsvService());
 		InitializeComponent();
 		MainPage = new AppShell();
 	}

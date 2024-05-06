@@ -25,12 +25,17 @@ public class FileService {
         await content.CopyToAsync(file);
     }
 
-    public async Task DeleteAllTradePhotos(){
+    public void DeleteAllTradePhotos(){
         if(Directory.Exists(PhotoFolder)){
             foreach(var photo in Directory.GetFiles(PhotoFolder)){
                 File.Delete(photo);
             }
         }
+    }
+
+    public string CsvExportFile(){
+        var exportFileName = $"tradetracker-{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.csv";
+        return Path.Combine(FileSystem.AppDataDirectory, exportFileName);
     }
 
 }
